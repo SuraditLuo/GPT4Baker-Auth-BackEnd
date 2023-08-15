@@ -43,7 +43,7 @@ public class UserController {
 
         if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             response.put("status", "401");
-            response.put("error", "Invalid username or password");
+            response.put("message", "Invalid username or password");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
 
