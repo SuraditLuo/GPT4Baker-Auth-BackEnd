@@ -48,6 +48,7 @@ public class UserController {
         }
 
         response.put("status", "200");
+        response.put("userId", String.valueOf(user.getId()));
         response.put("username", username);
         response.put("message", "Login successful");
 
