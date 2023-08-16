@@ -20,17 +20,14 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         User u1, u2, u3;
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         u1 = userRepository.save(User.builder()
-                        .username("TokiDokor")
                         .password(passwordEncoder.encode("TokiDoki@081"))
                         .email("luosuradit@gmail.com")
                         .build());
         u2 = userRepository.save(User.builder()
-                .username("T.Vin")
                 .password(passwordEncoder.encode("Bang093"))
                 .email("thictikorne@gmail.com")
                 .build());
         u3 = userRepository.save(User.builder()
-                .username("User")
                 .password(passwordEncoder.encode("anuser082"))
                 .email("user@outlook.com")
                 .build());

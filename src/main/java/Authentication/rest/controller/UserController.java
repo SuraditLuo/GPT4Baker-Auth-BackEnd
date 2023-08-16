@@ -34,10 +34,10 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginForm loginForm) {
-        String username = loginForm.getUsername();
+        String email = loginForm.getEmail();
         String password = loginForm.getPassword();
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(email);
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Map<String, String> response = new HashMap<>();
 
@@ -49,7 +49,7 @@ public class UserController {
 
         response.put("status", "200");
         response.put("userId", String.valueOf(user.getId()));
-        response.put("username", username);
+        response.put("email", email);
         response.put("message", "Login successful");
 
         return ResponseEntity.ok(response);
@@ -57,20 +57,19 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Map<String, String>> register(@RequestBody RegisterForm registrationForm) {
-        String username = registrationForm.getUsername();
+        String username = registrationForm.getEmail();
         String password = registrationForm.getPassword();
         String email = registrationForm.getEmail();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Map<String, String> response = new HashMap<>();
-        if (userRepository.existsByUsernameOrEmail(username, email)) {
+        if (userRepository.existsByEmail(email)) {
             response.put("status", "409");
-            response.put("message", "Username or email already taken");
+            response.put("message", "Email already taken");
             return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         } else{
             User newUser = User.builder()
-                    .username(username)
-                    .password(passwordEncoder.encode(password))
                     .email(email)
+                    .password(passwordEncoder.encode(password))
                     .build();
 
             userRepository.save(newUser);

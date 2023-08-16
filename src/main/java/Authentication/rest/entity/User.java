@@ -17,7 +17,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
-    String username;
     String email;
     String password;
 }

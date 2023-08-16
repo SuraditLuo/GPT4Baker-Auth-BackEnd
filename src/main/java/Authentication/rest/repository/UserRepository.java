@@ -5,6 +5,6 @@ import Authentication.rest.entity.User;
 import java.util.List;
 public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findAll();
-    User findByUsername(String username);
-    boolean existsByUsernameOrEmail(String username, String email);
+    User findByEmail(String email);
+    boolean existsByEmail(String email);
 }
