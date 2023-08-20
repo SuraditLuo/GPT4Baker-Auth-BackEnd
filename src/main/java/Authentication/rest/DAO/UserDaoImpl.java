@@ -22,11 +22,13 @@ public class UserDaoImpl implements UserDao{
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
-
     }
-
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+    @Override
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

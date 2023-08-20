@@ -13,8 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +78,16 @@ public class UserController {
             response.put("status", "200");
             response.put("message", "Registration successfully");
             return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+    }
+
+    @GetMapping("user/{id}")
+    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
+        User output = userService.getUser(id);
+        if (output != null) {
+            return ResponseEntity.ok(ProjectMapper.INSTANCE.getUserDto(output));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The given id is not found");
         }
     }
 }

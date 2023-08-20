@@ -1,5 +1,6 @@
 package Authentication.rest.DTO;
 
+import Authentication.rest.entity.ChatLog;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +13,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class ChatChannelDto {
     Long id;
-    String email;
-    String password;
-    List<UserChatChannelDto> chatChannels = new ArrayList<>();
+    String name;
+    List<ChannelLogDto> chatLogs = new ArrayList<>();
 }
