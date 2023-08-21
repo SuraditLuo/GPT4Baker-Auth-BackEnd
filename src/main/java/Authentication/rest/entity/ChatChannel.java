@@ -19,7 +19,7 @@ public class ChatChannel {
     String name;
     @ManyToOne(cascade = CascadeType.PERSIST)
     User user;
-    @OneToMany(mappedBy = "inChannel")
+    @OneToMany(mappedBy = "inChannel", cascade = CascadeType.ALL)
     @Builder.Default
     List<ChatLog> chatLogs = new ArrayList<>();
 }

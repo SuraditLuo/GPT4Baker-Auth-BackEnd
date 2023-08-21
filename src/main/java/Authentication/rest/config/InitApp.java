@@ -28,9 +28,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         User u1, u2, u3;
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         u1 = User.builder()
-                        .password(passwordEncoder.encode("TokiDoki@081"))
-                        .email("luosuradit@gmail.com")
-                        .build();
+                .password(passwordEncoder.encode("TokiDoki@081"))
+                .email("luosuradit@gmail.com")
+                .build();
         u2 = User.builder()
                 .password(passwordEncoder.encode("Bang093"))
                 .email("thictikorne@gmail.com")
