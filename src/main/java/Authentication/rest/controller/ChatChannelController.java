@@ -5,6 +5,7 @@ import Authentication.rest.DTO.UserDto;
 import Authentication.rest.entity.*;
 import Authentication.rest.entity.ChatChannel;
 import Authentication.rest.repository.ChatChannelRepository;
+import Authentication.rest.repository.ChatLogRepository;
 import Authentication.rest.repository.UserRepository;
 import Authentication.rest.service.ChatChannelService;
 import Authentication.rest.service.UserService;
@@ -30,6 +31,8 @@ public class ChatChannelController {
     ChatChannelRepository chatChannelRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ChatLogRepository chatLogRepository;
 
     @Autowired
     UserService userService;
@@ -93,5 +96,25 @@ public class ChatChannelController {
         ChatChannelDto chatChannelDto = ProjectMapper.INSTANCE.getChatChannelDto(chatChannel);
 
         return ResponseEntity.ok(chatChannelDto);
+    }
+    @PostMapping("/createLog/{id}")
+    public ResponseEntity<ChatChannelDto> createLog(
+            @PathVariable Long id,
+            @RequestParam String prompt,
+            @RequestParam String reply,
+            @RequestParam String pdfName
+    ) {
+        ChatChannel chatChannel = chatChannelRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Chat channel not found"));
+        ChatLog log = new ChatLog();
+        log.setPrompt(prompt);
+        log.setReply(reply);
+        log.setPdfName(pdfName);
+        log.setInChannel(chatChannel);
+        chatChannel.getChatLogs().add(log);
+        chatLogRepository.save(log);
+        chatChannelRepository.save(chatChannel);
+        ChatChannel output = chatChannelService.getChatChannel(id);
+        return ResponseEntity.ok(ProjectMapper.INSTANCE.getChatChannelDto(output));
     }
 }

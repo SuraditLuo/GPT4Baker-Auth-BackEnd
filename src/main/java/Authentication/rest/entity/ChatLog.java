@@ -14,8 +14,11 @@ public class ChatLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     Long id;
+    @Column(length = 3000)
     String prompt;
+    @Column(length = 3000)
     String reply;
+    String pdfName;
     @ManyToOne(cascade = CascadeType.PERSIST)
     ChatChannel inChannel;
 }

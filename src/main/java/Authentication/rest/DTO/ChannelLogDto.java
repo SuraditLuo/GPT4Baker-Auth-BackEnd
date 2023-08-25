@@ -13,4 +13,5 @@ public class ChannelLogDto {
     Long id;
     String prompt;
     String reply;
+    String pdfName;
 }

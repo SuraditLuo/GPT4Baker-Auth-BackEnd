@@ -28,7 +28,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         User u1, u2, u3;
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         u1 = User.builder()
-                .password(passwordEncoder.encode("TokiDoki@081"))
+                .password(passwordEncoder.encode("milk0810210999"))
                 .email("luosuradit@gmail.com")
                 .build();
         u2 = User.builder()
@@ -49,12 +49,15 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         ChatLog cl1, cl2, cl3;
         cl1 = chatLogRepository.save(ChatLog.builder()
                 .prompt("Hello")
+                .pdfName("Hello.pdf")
                 .reply("Hi").build());
         cl2 = chatLogRepository.save(ChatLog.builder()
                 .prompt("How are you?")
+                .pdfName("")
                 .reply("I'm fine, thank you!").build());
         cl3 = chatLogRepository.save(ChatLog.builder()
                 .prompt("Thank you")
+                .pdfName("")
                 .reply("You welcome!").build());
         //        Insert mock chat log into chat channel
         ch1.getChatLogs().add(cl1);

@@ -13,4 +13,5 @@ public class ChatLogDto {
     Long id;
     String prompt;
     String reply;
+    String pdfName;
 }

@@ -1,5 +1,6 @@
 package Authentication.rest.controller;
 
+import Authentication.rest.DTO.ChatChannelDto;
 import Authentication.rest.entity.LoginForm;
 import Authentication.rest.entity.RegisterForm;
 import Authentication.rest.entity.User;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -48,7 +50,6 @@ public class UserController {
             response.put("message", "Invalid username or password");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
-
         response.put("status", "200");
         response.put("userId", String.valueOf(user.getId()));
         response.put("email", email);
