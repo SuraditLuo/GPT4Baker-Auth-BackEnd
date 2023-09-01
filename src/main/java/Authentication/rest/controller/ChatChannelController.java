@@ -36,10 +36,6 @@ public class ChatChannelController {
 
     @Autowired
     UserService userService;
-    @GetMapping("/channels")
-    ResponseEntity<?> getChatChannels() {
-        return ResponseEntity.ok(ProjectMapper.INSTANCE.getChatChannelDto(chatChannelService.getChatChannels()));
-    }
     @GetMapping("channel/{id}")
     public ResponseEntity<?> getChatChannel(@PathVariable("id") Long id) {
         ChatChannel output = chatChannelService.getChatChannel(id);

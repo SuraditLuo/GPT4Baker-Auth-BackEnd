@@ -14,11 +14,6 @@ public class UserServiceImpl implements UserService{
     UserDao userDao;
 
     @Override
-    public List<User> getUsers() {
-        return userDao.getUser(Pageable.unpaged()).getContent();
-    }
-
-    @Override
     public User getUser(Long id) {
         return userDao.getUser(id);
     }

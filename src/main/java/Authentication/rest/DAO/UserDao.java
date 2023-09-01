@@ -7,9 +7,5 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface UserDao {
-    Page<User> getUser(Pageable pageRequest);
-    Optional<User> findById(Long id);
-    User save(User user);
-
     User getUser(Long id);
 }

@@ -1,8 +1,6 @@
 package Authentication.rest.controller;
 
-import Authentication.rest.DTO.ChatChannelDto;
-import Authentication.rest.entity.LoginForm;
-import Authentication.rest.entity.RegisterForm;
+import Authentication.rest.entity.AuthForm;
 import Authentication.rest.entity.User;
 import Authentication.rest.repository.UserRepository;
 import Authentication.rest.service.UserService;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -31,13 +28,8 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/users")
-    ResponseEntity<?> getUsers() {
-        return ResponseEntity.ok(ProjectMapper.INSTANCE.getUserDto(userService.getUsers()));
-    }
-
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginForm loginForm) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody AuthForm loginForm) {
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
 
@@ -47,7 +39,7 @@ public class UserController {
 
         if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
             response.put("status", "401");
-            response.put("message", "Invalid username or password");
+            response.put("message", "Invalid email or password");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
         }
         response.put("status", "200");
@@ -59,10 +51,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, String>> register(@RequestBody RegisterForm registrationForm) {
-        String username = registrationForm.getEmail();
-        String password = registrationForm.getPassword();
+    public ResponseEntity<Map<String, String>> register(@RequestBody AuthForm registrationForm) {
         String email = registrationForm.getEmail();
+        String password = registrationForm.getPassword();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Map<String, String> response = new HashMap<>();
         if (userRepository.existsByEmail(email)) {

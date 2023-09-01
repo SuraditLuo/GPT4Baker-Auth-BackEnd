@@ -16,19 +16,8 @@ public class ChatChannelDaoImpl implements ChatChannelDao{
     ChatChannelRepository chatChannelRepository;
 
     @Override
-    public Page<ChatChannel> getChatChannel(Pageable pageRequest) {
-        return chatChannelRepository.findAll(pageRequest);
-    }
-    @Override
     public ChatChannel getChatChannel(Long id) {
         return chatChannelRepository.findById(id).orElse(null);
     }
-    @Override
-    public Optional<ChatChannel> findById(Long id) {
-        return chatChannelRepository.findById(id);
-    }
-    @Override
-    public ChatChannel save(ChatChannel user) {
-        return chatChannelRepository.save(user);
-    }
+
 }

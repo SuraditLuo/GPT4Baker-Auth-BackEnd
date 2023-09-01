@@ -15,10 +15,6 @@ public class ChatChannelServiceImpl implements ChatChannelService{
     ChatChannelDao chatChannelDao;
 
     @Override
-    public List<ChatChannel> getChatChannels() {
-        return chatChannelDao.getChatChannel(Pageable.unpaged()).getContent();
-    }
-    @Override
     public ChatChannel getChatChannel(Long id) {
         return chatChannelDao.getChatChannel(id);
     }

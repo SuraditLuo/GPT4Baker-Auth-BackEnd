@@ -8,8 +8,5 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface ChatChannelDao {
-    Page<ChatChannel> getChatChannel(Pageable pageRequest);
-    Optional<ChatChannel> findById(Long id);
-    ChatChannel save(ChatChannel chatChannel);
     ChatChannel getChatChannel(Long id);
 }
