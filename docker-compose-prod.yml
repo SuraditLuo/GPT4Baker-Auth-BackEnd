@@ -20,7 +20,7 @@ services:
     image: suraditluo/baker-auth
     restart: always
     ports:
-      - 8999:8080
+      - 8080:8080
     environment:
       - JAVA_PROFILE=prod,db
     depends_on:
