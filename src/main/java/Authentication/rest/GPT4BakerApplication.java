@@ -19,7 +19,7 @@ public class GPT4BakerApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000", "http://54.86.64.152:3000")
+                        .allowedOrigins("http://localhost:3000", "http://54.86.64.152:3000") //deploy IP
                         .exposedHeaders("x-total-count");
 
             }
